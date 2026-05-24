@@ -1,8 +1,8 @@
 # 🍽️ Restaurant Chain Management System (RCMS)
 
-A C++ data structures project built for **"Koul Hani"** — a food service retail chain — to efficiently manage, analyze, and optimize restaurant data across Algeria.
+A C++ data structures project built for **"Koul Hani"**, a food service retail chain, to efficiently manage, analyze, and optimize restaurant data across Algeria.
 
-> 📚 Course: Data Structures and Algorithms 2 — ENSIA (Dec 2023)  
+> 📚 Course: Data Structures and Algorithms 2 - ENSIA (Dec 2023)  
 > 👩‍💻 Team: Bouzira Maroua · Boubenider Hanane · Latreche Dhikra Maram · Ben Chabane Rafida Djomana  
 > 🏫 Supervisor: Prof. Ahmed Guessoum
 
@@ -123,6 +123,6 @@ Running Time (ms)
 
 ## 📚 References
 
-- Mark Allen Weiss — *Data Structures and Algorithm Analysis in C++*, 4th ed., Pearson (2014)
+- Mark Allen Weiss - *Data Structures and Algorithm Analysis in C++*, 4th ed., Pearson (2014)
 - Course materials by Prof. Ahmed Guessoum (ENSIA)
 - LucidCharts for diagram design
