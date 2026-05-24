@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Information Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="process_form.php"  id="restaurantForm" method="post">
+        <div class="form-group">
+        <label for="restaurantName">Restaurant Name:</label>
+        <input type="text" id="restaurantName" name="restaurantName" required>
+        <div id="restaurantNameError" class="error"></div>
+</div>
+<div class="form-group">
+    <label for="ownership">Ownership:</label>
+    <select id="ownership" name="ownership" required>
+        <option value="" disabled selected>Select Ownership</option>
+        <option value="Franchised">Franchised</option>
+        <option value="Owned">Owned</option>
+    </select>
+    <div id="ownershipError" class="error"></div>
+</div>
+
+<div class="form-group">
+        <label for="numEmployees">Number of Employees:</label>
+        <input type="number" id="numEmployees" name="numEmployees" required>
+        <div id="numEmployeesError" class="error"></div>
+</div>
+
+<div class="form-group">
+        <label for="wilaya">Wilaya:</label>
+        <input type="text" id="wilaya" name="wilaya" required>
+        <div id="wilayaError" class="error"></div>
+</div>
+
+<div class="form-group">
+        <label for="district">District:</label>
+        <input type="text" id="district" name="district" required>
+        <div id="districtError" class="error"></div>
+</div>
+
+<div class="form-group">
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city" required>
+    <div id="cityError" class="error"></div>
+</div>
+
+<div class="form-group">
+        <label for="establishmentDate">Date of Establishment:</label>
+        <input type="date" id="establishmentDate" name="establishmentDate" required>
+        <div id="establishmentDateError" class="error"></div>
+</div>
+<div class="form-group">
+    <button type="submit" onclick="validateForm()">Submit</button>
+</div>
+
+    </form>
+
+    <script>
+        function validateForm() {
+            // Reset previous errors
+            clearErrors();
+
+            // Get form elements
+            var restaurantName = document.getElementById("restaurantName").value;
+            var ownership = document.getElementById("ownership").value;
+            var numEmployees = document.getElementById("numEmployees").value;
+            var wilaya = document.getElementById("wilaya").value;
+            var district = document.getElementById("district").value;
+            var city = document.getElementById("city").value;
+            var establishmentDate = document.getElementById("establishmentDate").value;
+
+            // Validate each field
+            if (restaurantName === "") {
+                displayError("restaurantName", "Please enter the Restaurant Name.");
+            }
+
+            if (ownership === "") {
+                displayError("ownership", "Please select the Ownership.");
+            }
+
+            if (numEmployees === "" || isNaN(numEmployees) || numEmployees < 0) {
+                displayError("numEmployees", "Please enter a valid number of Employees.");
+            }
+
+            if (wilaya === "") {
+                displayError("wilaya", "Please enter the Wilaya.");
+            }
+
+            if (district === "") {
+                displayError("district", "Please enter the District.");
+            }
+
+            if (city === "") {
+                displayError("city", "Please enter the City.");
+            }
+
+            if (establishmentDate === "") {
+                displayError("establishmentDate", "Please select the Date of Establishment.");
+            }
+
+            // Check if any errors occurred
+            if (hasErrors()) {
+                return; // Stop form submission if there are errors
+            }
+
+           
+        }
+
+        function displayError(fieldId, errorMessage) {
+            var errorElement = document.getElementById(fieldId + "Error");
+            errorElement.textContent = errorMessage;
+        }
+
+        function clearErrors() {
+            var errorElements = document.querySelectorAll(".error");
+            errorElements.forEach(function (element) {
+                element.textContent = "";
+            });
+        }
+
+        function hasErrors() {
+            var errorElements = document.querySelectorAll(".error");
+            for (var i = 0; i < errorElements.length; i++) {
+                if (errorElements[i].textContent !== "") {
+                    return true;
+                }
+            }
+            return false;
+        }
+    </script>
+
+</body>
+</html>

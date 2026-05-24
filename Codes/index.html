@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Mangement Chain System </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&family=Oswald:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/all.min.css"> <!-- fontawesome -->
+    <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="tailwind.css">
+    <link rel="stylesheet" href="tooplate-antique-cafe.css">
+    
+<!--
+
+Tooplate 2126 Antique Cafe
+
+https://www.tooplate.com/view/2126-antique-cafe
+
+-->
+</head>
+<body>    
+    <!-- Intro -->
+    <div id="intro" class="parallax-window" data-parallax="scroll" data-image-src="img/antique-cafe-bg-01.jpg">
+        <nav id="tm-nav" class="fixed w-full">
+            <div class="tm-container mx-auto px-2 md:py-6 text-right">
+                <button class="md:hidden py-2 px-2" id="menu-toggle"><i class="fas fa-2x fa-bars tm-text-gold"></i></button>
+                <ul class="mb-3 md:mb-0 text-2xl font-normal flex justify-end flex-col md:flex-row">
+                    <li class="inline-block mb-4 mx-4"><a href="#intro" class="tm-text-gold py-1 md:py-3 px-4">Intro</a></li>
+                    <li class="inline-block mb-4 mx-4"><a href="#menu" class="tm-text-gold py-1 md:py-3 px-4">Menu</a></li>
+                    <li class="inline-block mb-4 mx-4"><a href="#about" class="tm-text-gold py-1 md:py-3 px-4">About</a></li>
+                    <li class="inline-block mb-4 mx-4"><a href="#contact" class="tm-text-gold py-1 md:py-3 px-4">Contact</a></li>
+                </ul>
+            </div>            
+        </nav>
+        <div class="container mx-auto px-2 tm-intro-width">
+            <div class="sm:pb-60 sm:pt-48 py-20">
+                <div class="bg-black bg-opacity-70 p-12 mb-5 text-center">
+                    <h1 class="text-white text-5xl tm-logo-font mb-5">KOL HANI </h1>
+                    <p class="tm-text-gold tm-text-2xl"> Restaurant Chain Management System </p>
+                </div>    
+                <div class="bg-black bg-opacity-70 p-10 mb-5">
+                    <p class="text-white leading-8 text-sm font-light">
+                        This is a Restaurant  System . 
+                    	If you have any question, please <a >send us a message</a>. </p>
+                </div>
+                <div class="text-center">
+                    <div class="inline-block">
+                        <a href="#menu" class="flex justify-center items-center bg-black bg-opacity-70 py-6 px-8 rounded-lg font-semibold tm-text-2xl tm-text-gold hover:text-gray-200 transition">
+                            <i class="fas fa-coffee mr-3"></i>
+                            <span>Let's explore...</span>                        
+                        </a>
+                    </div>                    
+                </div>                
+            </div>
+        </div>        
+    </div>
+
+    <div id="menu" class="parallax-window" data-parallax="scroll" data-image-src="img/antique-cafe-bg-02.jpg">
+        <div class="container mx-auto tm-container py-24 sm:py-48">
+
+            <div class="flex flex-col lg:flex-row justify-around items-center">
+                <div class="flex-1 m-5 rounded-xl px-4 py-6 sm:px-8 sm:py-10 tm-bg-brown tm-item-container">
+
+                    
+                    <div class="flex items-start mb-6 tm-menu-item">
+                        <div class="ml-3 sm:ml-6">
+                            <!-- Add an ID to the button for easier identification -->
+                            <button id="showRestaurantsBtn" class="text-lg sm:text-xl mb-2 sm:mb-3 tm-text-yellow">Show Restaurants</button>
+                        </div>
+                    </div>
+
+
+                    <div class="flex items-start mb-6 tm-menu-item">
+                        <div class="ml-3 sm:ml-6">
+                            <a href="add.html">
+                                <h3 class="text-lg sm:text-xl mb-2 sm:mb-3 tm-text-yellow"> ADD Restaurant </h3>
+                            </a>
+                        </div>                    
+                    </div>
+
+    
+
+                    <div class="flex items-start mb-6 tm-menu-item">
+                        <div class="ml-3 sm:ml-6">
+                            <a href="daily_transactions.html">
+                                <h3 class="text-lg sm:text-xl mb-2 sm:mb-3 tm-text-yellow"> Daily Transactions  </h3>
+                            </a>
+                        </div>                    
+                    </div>
+    
+              
+
+                    <div class="flex items-start mb-6 tm-menu-item">
+                        <div class="ml-3 sm:ml-6">
+                            <!-- Add an ID to the search button for easier identification -->
+                            <button id="searchRestaurantBtn" class="text-lg sm:text-xl mb-2 sm:mb-3 tm-text-yellow">Search Restaurants</button>
+                        </div>
+                    </div>
+
+
+            
+                </div>
+            </div>
+        </div>
+    </div>
+    
+           
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/parallax.min.js"></script>
+    <script src="js/jquery.singlePageNav.min.js"></script>
+    <script>
+      
+      document.getElementById('showRestaurantsBtn').addEventListener('click', showRestaurants);
+      document.getElementById('searchRestaurantBtn').addEventListener('click', searchRestaurants);
+        function showRestaurants() {
+            // Assuming your CSV file is named "restaurants.csv"
+            // You should replace this path with the actual path to your CSV file
+            const csvFilePath = "dba.csv";
+
+            // Fetch the CSV file
+            fetch(csvFilePath)
+                .then(response => response.text())
+                .then(data => {
+                    // Split the CSV data into rows
+                    const rows = data.split('\n');
+
+                    // Extract restaurant names (assuming the first column contains names)
+                    const restaurantNames = rows.map(row => row.split(',')[0]);
+
+                    // Create a new page to display the restaurant names
+                    const newPageContent = `
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Restaurant Names</title>
+                        </head>
+                        <body>
+                            <h1>Restaurant Names</h1>
+                            <ul>
+                                ${restaurantNames.map(name => `<li>${name}</li>`).join('')}
+                            </ul>
+                        </body>
+                        </html>
+                    `;
+
+                    // Open a new window with the content
+                    const newWindow = window.open();
+                    newWindow.document.write(newPageContent);
+                })
+                .catch(error => {
+                    console.error('Error fetching CSV file:', error);
+                });
+        }
+
+
+        // search 
+        function searchRestaurants() {
+            const searchTerm = prompt('Enter a restaurant name to search:');
+
+            if (searchTerm) {
+                // Assuming your CSV file is named "restaurants.csv"
+                // You should replace this path with the actual path to your CSV file
+                const csvFilePath = "dba.csv";
+
+                // Fetch the CSV file
+                fetch(csvFilePath)
+                    .then(response => response.text())
+                    .then(data => {
+                        // Split the CSV data into rows
+                        const rows = data.split('\n');
+
+                        // Filter restaurant data based on the search term
+                        const matchingRestaurants = rows
+                            .filter(row => row.toLowerCase().includes(searchTerm.toLowerCase()))
+                            .map(row => row.split(','));
+
+                        // Create a new page to display the matching restaurants with all data
+                        const newPageContent = `
+                            <!DOCTYPE html>
+                            <html lang="en">
+                            <head>
+                                <meta charset="UTF-8">
+                                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <title>Matching Restaurants</title>
+                            </head>
+                            <body>
+                                <h1>Matching Restaurants for "${searchTerm}"</h1>
+                                <ul>
+                                    ${matchingRestaurants.map(restaurantData => `
+                                        <li>
+                                            <strong>${restaurantData[0]}</strong>: ${restaurantData.slice(1).join(', ')}
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </body>
+                            </html>
+                        `;
+
+                        // Open a new window with the content
+                        const newWindow = window.open();
+                        newWindow.document.write(newPageContent);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching CSV file:', error);
+                    });
+            }
+        }
+
+
+ 
+
+
+        function checkAndShowHideMenu() {
+            if(window.innerWidth < 768) {
+                $('#tm-nav ul').addClass('hidden');                
+            } else {
+                $('#tm-nav ul').removeClass('hidden');
+            }
+        }
+
+        $(function(){
+            var tmNav = $('#tm-nav');
+            tmNav.singlePageNav();
+
+            checkAndShowHideMenu();
+            window.addEventListener('resize', checkAndShowHideMenu);
+
+            $('#menu-toggle').click(function(){
+                $('#tm-nav ul').toggleClass('hidden');
+            });
+
+            $('#tm-nav ul li').click(function(){
+                if(window.innerWidth < 768) {
+                    $('#tm-nav ul').addClass('hidden');
+                }                
+            });
+
+            $(document).scroll(function() {
+                var distanceFromTop = $(document).scrollTop();
+
+                if(distanceFromTop > 100) {
+                    tmNav.addClass('scroll');
+                } else {
+                    tmNav.removeClass('scroll');
+                }
+            });
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

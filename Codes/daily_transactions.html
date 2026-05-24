@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Sales and Costs</title>
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            margin: 20px;
+        }
+
+        .form-container {
+            flex: 1;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-right: 20px;
+        }
+
+        .form-container:last-child {
+            margin-right: 0;
+        }
+
+        .form-container form {
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input {
+            width: calc(100% - 16px);
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-container">
+            <h1>Daily Sales Form</h1>
+
+            <form id="dailySalesForm" action="process2_form.php" method="post">
+
+                <div class="form-group">
+                    <label for="id_rest">ID:</label>
+                    <input type="number" id="id_rest" name="id_rest" required>
+                    <div id="id_restError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="day">Day:</label>
+                    <input type="date" id="day" name="day" required>
+                    <div id="dayError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Algerian_sales">Algerian Sales:</label>
+                    <input type="number" id="Algerian_sales" name="Algerian_sales" required>
+                    <div id="Algerian_salesError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Indian_sales">Indian Sales:</label>
+                    <input type="number" id="Indian_sales" name="Indian_sales" required>
+                    <div id="Indian_salesError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                <label for="Chinese_sales">Chinese Sales:</label>
+                <input type="number" id="Chinese_sales" name="Chinese_sales" required>
+                <div id="Chinese_salesError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                <label for="Syrian_sales">Syrian Sales:</label>
+                <input type="number" id="Syrian_sales" name="Syrian_sales" required>
+                <div id="Syrian_salesError" class="error"></div>
+                </div>
+
+               
+                
+                <div class="form-group">
+                    <label for="Europ_sales">European Sales:</label>
+                    <input type="number" id="Europ_sales" name="Europ_sales" required>
+                    <div id="Europ_salesError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="rent">Rent:</label>
+                    <input type="number" id="rent" name="rent" required>
+                    <div id="rentError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="employees">Employees:</label>
+                    <input type="number" id="employees" name="employees" required>
+                    <div id="employeesError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="electricity">Electricity:</label>
+                    <input type="number" id="electricity" name="electricity" required>
+                    <div id="electricityError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="gas">Gas:</label>
+                    <input type="number" id="gas" name="gas" required>
+                    <div id="gasError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="vegetables">Vegetables:</label>
+                    <input type="number" id="vegetables" name="vegetables" required>
+                    <div id="vegetablesError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="meats">Meats:</label>
+                    <input type="number" id="meats" name="meats" required>
+                    <div id="meatsError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="otherIngredients">Other Ingredients:</label>
+                    <input type="number" id="otherIngredients" name="otherIngredients" required>
+                    <div id="otherIngredientsError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="publicity">Publicity:</label>
+                    <input type="number" id="publicity" name="publicity" required>
+                    <div id="publicityError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="other">Other:</label>
+                    <input type="number" id="other" name="other" required>
+                    <div id="otherError" class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" onclick="validateForm()">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+    
+        function validateForm() {
+            clearErrors();
+    
+            const day = document.getElementById("day").value;
+            const rent = document.getElementById("rent").value;
+            const employees = document.getElementById("employees").value;
+            const electricity = document.getElementById("electricity").value;
+            const gas = document.getElementById("gas").value;
+            const vegetables = document.getElementById("vegetables").value;
+            const meats = document.getElementById("meats").value;
+            const otherIngredients = document.getElementById("otherIngredients").value;
+            const publicity = document.getElementById("publicity").value;
+            const other = document.getElementById("other").value;
+            const id_rest= document.getElementById("id_rest").value; 
+            const Algerian_sales = document.getElementById("Algerian_sales").value;
+            const Indian_sales = document.getElementById("Indian_sales").value;
+            const Chinese_sales = document.getElementById("Chinese_sales").value;
+            const Syrian_sales = document.getElementById("Syrian_sales").value;
+            const Europ_sales = document.getElementById("Europ_sales").value;
+       
+  
+        if (!isValidNumber(Algerian_sales)) {
+            displayError("Algerian_sales", "Please enter a valid number for Algerian Sales.");
+        }
+
+        if (!isValidNumber(Indian_sales)) {
+            displayError("Indian_sales", "Please enter a valid number for Indian Sales.");
+        }
+
+        if (!isValidNumber(Chinese_sales)) {
+            displayError("Chinese_sales", "Please enter a valid number for Chinese Sales.");
+        }
+
+        if (!isValidNumber(Syrian_sales)) {
+            displayError("Syrian_sales", "Please enter a valid number for Syrian Sales.");
+        }
+      
+        if (!isValidDate(day)) {
+            displayError("day", "Please enter a valid number for day.");
+        }
+      
+
+        if (!isValidNumber(Europ_sales)) {
+            displayError("Europ_sales", "Please enter a valid number for European Sales.");
+        }
+
+        if (!isValidNumber(id_rest)) {
+        displayError("id_rest", "Please enter a valid number for ID.");
+        }
+    
+        if (!isValidNumber(rent)) {
+            displayError("rent", "Please enter a valid number for Rent.");
+        }
+    
+        if (!isValidNumber(employees)) {
+         displayError("employees", "Please enter a valid number for Employees.");
+            }
+    
+            if (!isValidNumber(electricity)) {
+                displayError("electricity", "Please enter a valid number for Electricity.");
+            }
+
+            if (!isValidNumber(gas)) {
+                displayError("gas", "Please enter a valid number for Gas.");
+            }
+    
+            if (!isValidNumber(vegetables)) {
+                displayError("vegetables", "Please enter a valid number for Vegetables.");
+            }
+    
+            if (!isValidNumber(meats)) {
+                displayError("meats", "Please enter a valid number for Meats.");
+            }
+    
+            if (!isValidNumber(otherIngredients)) {
+                displayError("otherIngredients", "Please enter a valid number for Other Ingredients.");
+            }
+    
+            if (!isValidNumber(publicity)) {
+                displayError("publicity", "Please enter a valid number for Publicity.");
+            }
+    
+            if (!isValidNumber(other)) {
+                displayError("other", "Please enter a valid number for Other.");
+            }
+
+             if (hasErrors()) {
+              return; 
+             }
+
+       
+         submitForm('dailySalesForm', 'process2_form.php');
+            
+
+            // If all fields are valid, you can proceed with form submission or other actions
+            alert("Forms form submitted successfully!");
+        }
+    
+        function isValidNumber(value) {
+            return !isNaN(parseFloat(value)) && isFinite(value);
+        }
+        function isValidDate(value) {
+            const dateObject = new Date(value);
+            return !isNaN(dateObject.getTime());
+        }
+        function displayError(fieldId, errorMessage) {
+            const errorElement = document.getElementById(fieldId + "Error");
+            errorElement.textContent = errorMessage;
+        }
+    
+        function clearErrors() {
+            const errorElements = document.querySelectorAll(".error");
+            errorElements.forEach(element => {
+                element.textContent = "";
+            });
+        }
+    
+        function hasErrors() {
+            const errorElements = document.querySelectorAll(".error");
+            for (let i = 0; i < errorElements.length; i++) {
+                if (errorElements[i].textContent !== "") {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+  
+        function submitForm(formId, action) {
+            clearErrors();
+
+            const formData = new FormData(document.getElementById(formId));
+
+            fetch(action, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`${data.message}\nForm submitted successfully!`);
+                } else {
+                    alert(`Error: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error);
+            });
+        }
+
+ 
+
+</script>
+
+    
+</html>
